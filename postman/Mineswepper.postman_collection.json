@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "137da4d9-13b0-44a3-bf23-bcfeee0878a4",
+		"name": "Mineswepper",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30141690"
+	},
+	"item": [
+		{
+			"name": "Start game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"width\": 10,\n  \"height\": 10,\n  \"mines_count\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/new",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Run game",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "localhost:8080"
+		}
+	]
+}
