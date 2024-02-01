@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"width\": 10,\n  \"height\": 10,\n  \"mines_count\": 10\n}",
+					"raw": "{\n    \"width\": 10,\n    \"height\": 10,\n    \"mines_count\": 10\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,8 +38,29 @@
 		{
 			"name": "Run game",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"game_id\": \"e6d3e0d1-ecc6-4759-b57f-3126a3bd5eb5\",\n    \"col\": 9,\n    \"row\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/turn",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"turn"
+					]
+				}
 			},
 			"response": []
 		}
