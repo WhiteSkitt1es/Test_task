@@ -28,7 +28,7 @@ public class GameService {
     }
 
     public GameInfoDto playGame(GameTurnDto gameTurnDto) {
-        if (gameTurnDto.getGameId().equals(buildGame.getGameId().toString()) /*&& !buildGame.getCompleted()*/) {
+        if (gameTurnDto.getGameId().equals(buildGame.getGameId().toString())) {
             buildGame.openCell(gameTurnDto.getCol() - 1, gameTurnDto.getRow() - 1);
             return GameInfoDto.of(buildGame.getGameId().toString(),
                     buildGame.getSizeField(),

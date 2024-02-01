@@ -15,7 +15,5 @@ class MinesweeperApplicationTests {
         String[][] fields = game.getOpenFields();
         System.out.println(Arrays.deepToString(fields));
         System.out.println(game.getGameId());
-
     }
-
 }

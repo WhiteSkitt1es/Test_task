@@ -44,7 +44,6 @@ public class BuildGame {
             }
         }
 
-
         while (numberOfMines < minesCount) {
             do {
                 x = random.nextInt(minesCount);
