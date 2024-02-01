@@ -1,7 +1,8 @@
 package com.whiteskittles.minesweeper.game;
 
+import com.whiteskittles.minesweeper.exceptions.EndGameException;
+import com.whiteskittles.minesweeper.exceptions.TableSizeException;
 import lombok.Getter;
-import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.Random;
@@ -22,7 +23,7 @@ public class BuildGame {
         if (Objects.equals(width, height)) {
             this.sizeField = width;
         } else {
-            throw new RuntimeException("Высота и ширина поля не равны!");
+            throw new TableSizeException("Высота и ширина поля не равны!");
         }
         this.minesCount = minesCount;
         this.completed = false;
@@ -83,6 +84,9 @@ public class BuildGame {
     }
 
     public void openCell(int y, int x) {
+        if (completed) {
+            throw new EndGameException("Игра закончена");
+        }
         if (countOpenedCells < sizeField * sizeField - minesCount) {
             if (isNotOpen(y, x)) {
 //                closeFields[y][x] = openFields[y][x];

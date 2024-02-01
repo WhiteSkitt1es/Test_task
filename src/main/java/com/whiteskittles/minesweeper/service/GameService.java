@@ -3,6 +3,7 @@ package com.whiteskittles.minesweeper.service;
 import com.whiteskittles.minesweeper.dto.GameInfoDto;
 import com.whiteskittles.minesweeper.dto.GameTurnDto;
 import com.whiteskittles.minesweeper.dto.NewGameDto;
+import com.whiteskittles.minesweeper.exceptions.SessionException;
 import com.whiteskittles.minesweeper.game.BuildGame;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class GameService {
     }
 
     public GameInfoDto playGame(GameTurnDto gameTurnDto) {
-        if (gameTurnDto.getGameId().equals(buildGame.getGameId().toString()) && !buildGame.getCompleted()) {
+        if (gameTurnDto.getGameId().equals(buildGame.getGameId().toString()) /*&& !buildGame.getCompleted()*/) {
             buildGame.openCell(gameTurnDto.getCol() - 1, gameTurnDto.getRow() - 1);
             return GameInfoDto.of(buildGame.getGameId().toString(),
                     buildGame.getSizeField(),
@@ -36,7 +37,7 @@ public class GameService {
                     buildGame.getCompleted(),
                     buildGame.getCloseFields());
         } else {
-            throw new RuntimeException();
+            throw new SessionException("Идентификатор сессии не соответствует действительному");
         }
     }
 }
