@@ -1,4 +1,4 @@
-package com.whiteskittles.minesweeper.http.rest.handler;
+package com.whiteskittles.minesweeper.http.handler;
 
 import com.whiteskittles.minesweeper.dto.ErrorDto;
 import lombok.extern.slf4j.Slf4j;
