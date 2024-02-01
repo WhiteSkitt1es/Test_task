@@ -19,10 +19,10 @@ public class BuildGame {
     private int countOpenedCells;
 
     public BuildGame(Integer width, Integer height, Integer minesCount) {
-        if (width.equals(height)) {
+        if (Objects.equals(width, height)) {
             this.sizeField = width;
         } else {
-            throw new RuntimeException();
+            throw new RuntimeException("Высота и ширина поля не равны!");
         }
         this.minesCount = minesCount;
         this.completed = false;
@@ -83,24 +83,38 @@ public class BuildGame {
     }
 
     public void openCell(int y, int x) {
-        if (countOpenedCells < sizeField * sizeField - 1 && !completed) {
+        if (countOpenedCells < sizeField * sizeField - minesCount) {
             if (isNotOpen(y, x)) {
-                this.closeFields[y][x] = openFields[y][x];
-                countOpenedCells++;
+//                closeFields[y][x] = openFields[y][x];
+                openCells(x, y);
+//                countOpenedCells++;
             }
             if (isFieldMine(y, x)) {
-                this.closeFields[y][x] = openFields[y][x];
+                closeFields[y][x] = openFields[y][x];
                 completed = true;
+                closeFields = openFields;
             }
+        } else {
+            for (x = 0; x < sizeField; x++) {
+                for (y = 0; y < sizeField; y++) {
+                    if (isFieldMine(y, x)) {
+                        openFields[y][x] = "M";
+                    }
+                }
+            }
+            completed = true;
+            closeFields = openFields;
         }
     }
 
-//    void openCells(int x, int y) {
-//        if (x < 0 || x > sizeField - 1 || y < 0 || y > sizeField - 1) return;
-//        if (!openFields[y][x].isNotOpen()) return;
-//        openFields[y][x].open();
-//        if (openFields[y][x].getCountBombNear() > 0 || bandMine) return;
-//        for (int dx = -1; dx < 2; dx++)
-//            for (int dy = -1; dy < 2; dy++) openCells(x + dx, y + dy);
-//    }
+    void openCells(int x, int y) {
+        if (x < 0 || x > sizeField - 1 || y < 0 || y > sizeField - 1) return;
+        if (!isNotOpen(y, x)) return;
+        closeFields[y][x] = openFields[y][x];
+        countOpenedCells++;
+        if (isFieldMine(y, x)) return;
+        if (Integer.parseInt(openFields[y][x]) > 0) return;
+        for (int dx = -1; dx < 2; dx++)
+            for (int dy = -1; dy < 2; dy++) openCells(x + dx, y + dy);
+    }
 }

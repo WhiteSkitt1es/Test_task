@@ -15,7 +15,7 @@ public class GameService {
 
     public GameInfoDto startGame(NewGameDto newGameDto) {
         buildGame = new BuildGame(newGameDto.getWidth(),
-                newGameDto.getWidth(),
+                newGameDto.getHeight(),
                 newGameDto.getMinesCount());
 
         return GameInfoDto.of(buildGame.getGameId().toString(),
@@ -27,7 +27,7 @@ public class GameService {
     }
 
     public GameInfoDto playGame(GameTurnDto gameTurnDto) {
-        if (gameTurnDto.getGameId().equals(buildGame.getGameId().toString())) {
+        if (gameTurnDto.getGameId().equals(buildGame.getGameId().toString()) && !buildGame.getCompleted()) {
             buildGame.openCell(gameTurnDto.getCol() - 1, gameTurnDto.getRow() - 1);
             return GameInfoDto.of(buildGame.getGameId().toString(),
                     buildGame.getSizeField(),
