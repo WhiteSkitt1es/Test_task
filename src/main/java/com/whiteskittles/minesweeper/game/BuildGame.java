@@ -83,9 +83,6 @@ public class BuildGame {
     }
 
     public void openCell(int y, int x) {
-        if (completed) {
-            throw new EndGameException("Игра закончена");
-        }
         if (countOpenedCells < sizeField * sizeField - minesCount) {
             if (isNotOpen(y, x)) {
 //                closeFields[y][x] = openFields[y][x];
