@@ -1,10 +1,8 @@
 package com.whiteskittles.minesweeper.game;
 
-import com.whiteskittles.minesweeper.exceptions.EndGameException;
 import com.whiteskittles.minesweeper.exceptions.TableSizeException;
 import lombok.Getter;
 
-import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
@@ -20,7 +18,7 @@ public class BuildGame {
     private int countOpenedCells;
 
     public BuildGame(Integer width, Integer height, Integer minesCount) {
-        if (Objects.equals(width, height)) {
+        if (width.equals(height)) {
             this.sizeField = width;
         } else {
             throw new TableSizeException("Высота и ширина поля не равны!");
@@ -46,9 +44,9 @@ public class BuildGame {
 
         while (numberOfMines < minesCount) {
             do {
-                x = random.nextInt(minesCount);
-                y = random.nextInt(minesCount);
-            } while (Objects.equals(openFields[y][x], "X"));
+                x = random.nextInt(sizeField - 1);
+                y = random.nextInt(sizeField - 1);
+            } while (isFieldMine(y, x));
             openFields[y][x] = "X";
             numberOfMines++;
         }
@@ -75,11 +73,11 @@ public class BuildGame {
     }
 
     private boolean isFieldMine(int y, int x) {
-        return Objects.equals(openFields[y][x], "X");
+        return openFields[y][x].equals("X");
     }
 
     private boolean isNotOpen(int y, int x) {
-        return Objects.equals(closeFields[y][x], " ");
+        return closeFields[y][x].equals(" ");
     }
 
     public void openCell(int y, int x) {
